@@ -21,9 +21,10 @@ cleanup() {
 }
 trap cleanup EXIT
 
+ARCH=$(chroot "$ROOT" dpkg --print-architecture)
 if [ -d /sys/firmware/efi ]; then
 	SET=efi
-	PACKAGES="grub-efi-amd64 grub-efi-amd64-signed shim-signed"
+	PACKAGES="grub-efi-$ARCH grub-efi-$ARCH-signed shim-signed"
 else
 	SET=bios
 	PACKAGES="grub-pc"

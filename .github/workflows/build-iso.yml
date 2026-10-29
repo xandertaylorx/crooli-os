@@ -19,7 +19,20 @@ permissions:
 
 jobs:
   iso:
-    runs-on: ubuntu-latest
+    name: ISO (${{ matrix.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Intel and AMD PCs
+          - arch: amd64
+            runner: ubuntu-latest
+            host_packages: grub-efi-amd64-bin grub-pc-bin syslinux syslinux-common isolinux
+          # Apple silicon (in UTM, Parallels, VMware) and ARM PCs
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+            host_packages: grub-efi-arm64-bin
+    runs-on: ${{ matrix.runner }}
     timeout-minutes: 120
     container:
       image: debian:trixie
@@ -30,8 +43,7 @@ jobs:
           apt-get update
           apt-get install -y --no-install-recommends \
             git ca-certificates apt-utils live-build debootstrap squashfs-tools xorriso \
-            grub-efi-amd64-bin grub-pc-bin mtools dosfstools \
-            syslinux syslinux-common isolinux
+            mtools dosfstools ${{ matrix.host_packages }}
 
       - uses: actions/checkout@v4
 
@@ -47,6 +59,9 @@ jobs:
           unsquashfs -ll "$SQ" > /tmp/files.txt
           unsquashfs -cat "$SQ" var/lib/dpkg/status > /tmp/dpkg-status
           fail=0
+          EXTRA=""
+          # Older BIOS PCs only exist on Intel/AMD.
+          [ "${{ matrix.arch }}" = amd64 ] && EXTRA="usr/share/crooli/bootloader/bios"
           for p in \
             usr/share/gnome-shell/extensions/crooli-theme@crooli.com/extension.js \
             usr/share/gnome-shell/extensions/crooli-theme@crooli.com/stylesheet.css \
@@ -62,60 +77,77 @@ jobs:
             usr/share/applications/com.crooli.Welcome.desktop \
             usr/share/glib-2.0/schemas/90_crooli.gschema.override \
             usr/bin/crooli-welcome usr/bin/crooli-install \
-            usr/sbin/crooli-bootloader-config usr/share/crooli/bootloader/bios usr/share/crooli/bootloader/efi \
+            usr/sbin/crooli-bootloader-config usr/share/crooli/bootloader/efi $EXTRA \
             etc/calamares/settings.conf etc/calamares/modules/users.conf; do
             grep -q "squashfs-root/$p" /tmp/files.txt || { echo "MISSING: $p"; fail=1; }
           done
           for pkg in user-setup live-config live-boot calamares gdm3 ptyxis flatpak \
-            papirus-icon-theme gnome-shell-extension-dashtodock gnome-software nautilus; do
+            papirus-icon-theme gnome-shell-extension-dashtodock gnome-software nautilus \
+            linux-image-${{ matrix.arch }}; do
             grep -q "^Package: $pkg\$" /tmp/dpkg-status || { echo "PACKAGE NOT INSTALLED: $pkg"; fail=1; }
           done
           unsquashfs -cat "$SQ" usr/lib/os-release | grep -q 'NAME="Crooli OS"' || { echo "os-release not Crooli"; fail=1; }
           unsquashfs -cat "$SQ" etc/dconf/db/crooli | grep -aq 'Papirus-Dark' || { echo "dconf db missing Crooli settings"; fail=1; }
           unsquashfs -cat "$SQ" usr/share/glib-2.0/schemas/gschemas.compiled | grep -aq 'crooli' || { echo "schema override not compiled"; fail=1; }
-          [ "$fail" = 0 ] && echo "Image contents verified."
+          [ "$fail" = 0 ] && echo "Image contents verified for ${{ matrix.arch }}."
           exit $fail
 
-      - name: Checksum
+      - name: Name and checksum
         run: |
-          ISO=$(ls *.iso)
-          sha256sum "$ISO" > "$ISO.sha256"
-          ls -lh "$ISO"
+          # Fixed names, so the website can link to the latest release directly.
+          mv ./*.iso "crooli-os-${{ matrix.arch }}.iso"
+          sha256sum "crooli-os-${{ matrix.arch }}.iso" > "crooli-os-${{ matrix.arch }}.iso.sha256"
+          ls -lh crooli-os-*
 
       - name: Upload build log
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: build-log
+          name: build-log-${{ matrix.arch }}
           path: build.log
           if-no-files-found: ignore
 
       - name: Upload ISO
         uses: actions/upload-artifact@v4
         with:
-          name: crooli-os-iso
+          name: crooli-os-iso-${{ matrix.arch }}
           path: |
-            *.iso
-            *.iso.sha256
+            crooli-os-*.iso
+            crooli-os-*.iso.sha256
           compression-level: 0
           retention-days: 14
 
-      - name: Publish release
-        if: startsWith(github.ref, 'refs/tags/v')
+  release:
+    name: Publish release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: iso
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: crooli-os-iso-*
+          merge-multiple: true
+
+      - name: Publish
         uses: softprops/action-gh-release@v2
         with:
-          name: Crooli OS 1.0.1
+          name: Crooli OS ${{ github.ref_name }}
+          generate_release_notes: true
           body: |
-            **Crooli OS 1.0.1.** A calm, fast desktop for people who have never used Linux.
+            A calm, fast desktop for people who have never used Linux.
 
-            1. Download the `.iso` file below.
-            2. Write it to a USB stick with [balenaEtcher](https://etcher.balena.io).
-            3. Start your computer from the USB stick, try it, then click **Install Crooli OS** in the dock.
+            **Pick the right download**
 
-            What's new since 1.0: a Crooli boot menu instead of the Debian one, the Crooli colours in the terminal, and the right Crooli icon for the Welcome app in the dock.
+            | Your computer | Download |
+            |---|---|
+            | Intel or AMD PC | `crooli-os-amd64.iso` |
+            | Mac with Apple silicon (M1 and later), in UTM, Parallels or VMware, or an ARM PC | `crooli-os-arm64.iso` |
 
-            Checksum: see the `.sha256` file. Needs a 64-bit PC with 2 GB of memory and 16 GB of storage.
-            More at https://os.crooli.com
+            1. Download the `.iso` file for your computer.
+            2. On a PC, write it to a USB stick with [balenaEtcher](https://etcher.balena.io), then start the PC from the stick. On a Mac, open it in [UTM](https://mac.getutm.app) and choose **Virtualize**.
+            3. Try it, then click **Install Crooli OS** in the dock.
+
+            Each file has a matching `.sha256` checksum. Needs 2 GB of memory and 16 GB of storage. More at https://os.crooli.com
           files: |
-            *.iso
-            *.iso.sha256
+            crooli-os-*.iso
+            crooli-os-*.iso.sha256

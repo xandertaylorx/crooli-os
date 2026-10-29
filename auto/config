@@ -3,10 +3,19 @@
 # Base: Debian 13 "trixie" (stable). Desktop: a minimal, pre-tuned GNOME, styled to the Crooli brand.
 set -e
 
+# Build for the machine we run on: amd64 (Intel/AMD PCs) or arm64 (Apple
+# silicon VMs and ARM PCs). Override with CROOLI_ARCH=arm64 ./build.sh
+ARCH="${CROOLI_ARCH:-$(dpkg --print-architecture)}"
+case "$ARCH" in
+	amd64) BOOTLOADERS="grub-efi syslinux" ;;
+	arm64) BOOTLOADERS="grub-efi" ;;
+	*) echo "Unsupported architecture: $ARCH" >&2; exit 1 ;;
+esac
+
 lb config noauto \
 	--distribution trixie \
-	--architectures amd64 \
-	--linux-flavours amd64 \
+	--architectures "$ARCH" \
+	--linux-flavours "$ARCH" \
 	--archive-areas "main contrib non-free non-free-firmware" \
 	--mirror-bootstrap "http://deb.debian.org/debian/" \
 	--mirror-binary "http://deb.debian.org/debian/" \
@@ -16,7 +25,7 @@ lb config noauto \
 	--apt-recommends false \
 	--debian-installer none \
 	--binary-images iso-hybrid \
-	--bootloaders "grub-efi syslinux" \
+	--bootloaders "$BOOTLOADERS" \
 	--firmware-binary true \
 	--firmware-chroot true \
 	--memtest none \

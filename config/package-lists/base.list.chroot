@@ -1,5 +1,10 @@
 # Kernel, live system and boot
+#if ARCHITECTURES amd64
 linux-image-amd64
+#endif
+#if ARCHITECTURES arm64
+linux-image-arm64
+#endif
 live-boot
 live-config
 live-config-systemd
@@ -21,8 +26,13 @@ curl
 # BIOS or UEFI is installed from a copy kept on the image)
 grub-common
 grub2-common
+#if ARCHITECTURES amd64
 grub-pc-bin
 grub-efi-amd64-bin
+#endif
+#if ARCHITECTURES arm64
+grub-efi-arm64-bin
+#endif
 efibootmgr
 dosfstools
 mtools
@@ -37,13 +47,22 @@ firmware-iwlwifi
 firmware-realtek
 firmware-atheros
 firmware-brcm80211
+#if ARCHITECTURES amd64
 firmware-intel-sound
+#endif
 firmware-sof-signed
+#if ARCHITECTURES amd64
 intel-microcode
 amd64-microcode
+#endif
 mesa-vulkan-drivers
 libgl1-mesa-dri
 fwupd
+
+# Running inside UTM, QEMU, VMware or Parallels: screen resizing and clipboard
+spice-vdagent
+qemu-guest-agent
+open-vm-tools-desktop
 
 # Networking, sound, bluetooth, printing
 network-manager

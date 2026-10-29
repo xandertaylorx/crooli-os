@@ -1,12 +1,19 @@
 #!/bin/sh
 # Keep both bootloaders on the image, ready for the installer to use offline.
-# grub-pc (older BIOS PCs) and grub-efi-amd64 (UEFI, Secure Boot) conflict,
+# On Intel/AMD, grub-pc (older BIOS PCs) and grub-efi-amd64 (UEFI) conflict,
 # so each set is downloaded into its own folder without being installed.
 set -e
 
 D=/usr/share/crooli/bootloader
-for set in "bios:grub-pc" \
-	"efi:grub-efi-amd64 grub-efi-amd64-signed shim-signed"; do
+case "$(dpkg --print-architecture)" in
+	amd64) SETS="bios:grub-pc|efi:grub-efi-amd64 grub-efi-amd64-signed shim-signed" ;;
+	arm64) SETS="efi:grub-efi-arm64 grub-efi-arm64-signed shim-signed" ;;
+esac
+
+OLDIFS=$IFS
+IFS='|'
+for set in $SETS; do
+	IFS=$OLDIFS
 	dir="$D/${set%%:*}"
 	mkdir -p "$dir/partial"
 	apt-get install -y --download-only \

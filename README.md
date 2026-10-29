@@ -33,7 +33,14 @@ Crooli Sans typeface.
 | **Hardware** | Non-free firmware included so Wi-Fi, graphics and sound work out of the box. UEFI, Secure Boot and BIOS. |
 | **Privacy** | No telemetry, no accounts, location services off by default. |
 
-Minimum: 64-bit PC, 2 GB RAM (4 GB recommended), 16 GB storage.
+Minimum: 2 GB RAM (4 GB recommended) and 16 GB storage. There are two downloads:
+
+| For | File |
+|---|---|
+| Intel or AMD PC | `crooli-os-amd64.iso` |
+| Mac with Apple silicon (in UTM, Parallels or VMware), or an ARM PC | `crooli-os-arm64.iso` |
+
+The ARM version runs natively in a virtual machine on an M-series Mac. It does not install onto a Mac's own disk; that needs Asahi Linux.
 
 ## Repository layout
 
@@ -57,11 +64,13 @@ build.sh         one-command build
 On any machine with Docker or Podman (macOS included):
 
 ```bash
-./build.sh
+./build.sh          # builds for this machine (ARM on an Apple silicon Mac)
+./build.sh amd64    # Intel and AMD PCs
+./build.sh arm64    # Apple silicon VMs and ARM PCs
 ```
 
 On Debian with `live-build` installed, the same script runs it natively.
-The ISO appears in the repository root as `crooli-os-1.0.1-amd64.hybrid.iso`.
+The ISO appears in the repository root, for example `crooli-os-1.0.1-arm64.hybrid.iso`.
 A full build takes 20–60 minutes and needs about 15 GB of free space.
 
 Every push to `main` also builds the ISO on GitHub Actions; download it from
