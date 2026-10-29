@@ -43,6 +43,14 @@ cp "$B/wordmark-installer.png" "$C/welcome.png"
 cp "$B/wordmark-boot.png" /usr/share/plymouth/themes/spinner/watermark.png
 plymouth-set-default-theme bgrt
 
+# --- Login screen ---------------------------------------------------------
+# desktop-base (pulled in by GNOME) brands the login screen as Debian. Add
+# our settings last in the greeter's own defaults so they win, then rebuild.
+if [ -d /usr/share/gdm/dconf ]; then
+	cp /etc/dconf/db/gdm.d/00-crooli /usr/share/gdm/dconf/99-crooli-settings
+	dconf compile /usr/share/gdm/greeter-dconf-defaults /usr/share/gdm/dconf
+fi
+
 # --- Fonts and desktop defaults ------------------------------------------
 fc-cache -f >/dev/null
 dconf update

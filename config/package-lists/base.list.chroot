@@ -3,6 +3,8 @@ linux-image-amd64
 live-boot
 live-config
 live-config-systemd
+live-tools
+user-setup
 systemd-sysv
 systemd-zram-generator
 plymouth
@@ -16,7 +18,7 @@ ca-certificates
 curl
 
 # Bootloader pieces the installer needs (the matching grub package for
-# BIOS or UEFI is pulled from the ISO pool at install time)
+# BIOS or UEFI is installed from a copy kept on the image)
 grub-common
 grub2-common
 grub-pc-bin
