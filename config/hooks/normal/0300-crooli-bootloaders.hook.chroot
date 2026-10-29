@@ -1,0 +1,16 @@
+#!/bin/sh
+# Keep both bootloaders on the image, ready for the installer to use offline.
+# grub-pc (older BIOS PCs) and grub-efi-amd64 (UEFI, Secure Boot) conflict,
+# so each set is downloaded into its own folder without being installed.
+set -e
+
+D=/usr/share/crooli/bootloader
+for set in "bios:grub-pc" \
+	"efi:grub-efi-amd64 grub-efi-amd64-signed shim-signed"; do
+	dir="$D/${set%%:*}"
+	mkdir -p "$dir/partial"
+	apt-get install -y --download-only \
+		-o Dir::Cache::archives="$dir" ${set#*:}
+	rm -rf "$dir/partial" "$dir/lock"
+	ls "$dir"/*.deb >/dev/null
+done

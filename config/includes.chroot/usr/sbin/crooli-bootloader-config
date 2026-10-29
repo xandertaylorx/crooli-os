@@ -1,15 +1,12 @@
 #!/bin/sh
 # Called by the installer with the target root as $1. Installs the right
-# GRUB package (UEFI with Secure Boot, or legacy BIOS) from the package pool
-# on the install medium, so this works without an internet connection.
+# GRUB packages (UEFI with Secure Boot, or legacy BIOS) from the copies the
+# image carries in /usr/share/crooli/bootloader, so no internet is needed.
 set -e
 
 ROOT="$1"
-MEDIUM=/run/live/medium
 [ -n "$ROOT" ] || { echo "usage: $0 TARGET_ROOT" >&2; exit 1; }
 
-mkdir -p "$ROOT/media/crooli-medium"
-mount --bind "$MEDIUM" "$ROOT/media/crooli-medium"
 OURS=""
 for fs in dev proc sys; do
 	if ! mountpoint -q "$ROOT/$fs"; then
@@ -18,27 +15,25 @@ for fs in dev proc sys; do
 	fi
 done
 
-LIST="$ROOT/etc/apt/sources.list.d/crooli-medium.list"
-echo "deb [trusted=yes] file:/media/crooli-medium trixie main" > "$LIST"
-
 cleanup() {
-	rm -f "$LIST"
+	rm -rf "$ROOT/usr/share/crooli/bootloader"
 	for m in $OURS; do umount "$m" 2>/dev/null || true; done
-	umount "$ROOT/media/crooli-medium" 2>/dev/null || true
-	rmdir "$ROOT/media/crooli-medium" 2>/dev/null || true
 }
 trap cleanup EXIT
 
 if [ -d /sys/firmware/efi ]; then
+	SET=efi
 	PACKAGES="grub-efi-amd64 grub-efi-amd64-signed shim-signed"
 else
+	SET=bios
 	PACKAGES="grub-pc"
 fi
 
-chroot "$ROOT" apt-get update \
-	-o Dir::Etc::sourcelist="sources.list.d/crooli-medium.list" \
-	-o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"
-DEBIAN_FRONTEND=noninteractive chroot "$ROOT" apt-get install -y --no-download \
-	-o Dpkg::Options::="--force-confold" $PACKAGES || \
-DEBIAN_FRONTEND=noninteractive chroot "$ROOT" apt-get install -y \
-	-o Dpkg::Options::="--force-confold" $PACKAGES
+DEBS=$(cd "$ROOT" && ls usr/share/crooli/bootloader/$SET/*.deb 2>/dev/null | sed 's|^|/|')
+if [ -n "$DEBS" ]; then
+	DEBIAN_FRONTEND=noninteractive chroot "$ROOT" apt-get install -y \
+		-o Dpkg::Options::="--force-confold" $DEBS
+else
+	DEBIAN_FRONTEND=noninteractive chroot "$ROOT" apt-get install -y \
+		-o Dpkg::Options::="--force-confold" $PACKAGES
+fi
