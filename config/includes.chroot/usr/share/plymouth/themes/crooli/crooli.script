@@ -1,0 +1,16 @@
+# Crooli OS boot splash: the mark, breathing gently on Ink.
+Window.SetBackgroundTopColor(0.039, 0.039, 0.039);
+Window.SetBackgroundBottomColor(0.039, 0.039, 0.039);
+
+logo.image = Image("logo.png");
+logo.sprite = Sprite(logo.image);
+logo.x = Window.GetX() + Window.GetWidth() / 2 - logo.image.GetWidth() / 2;
+logo.y = Window.GetY() + Window.GetHeight() / 2 - logo.image.GetHeight() / 2;
+logo.sprite.SetPosition(logo.x, logo.y, 10);
+
+frame = 0;
+fun refresh_callback () {
+    frame++;
+    logo.sprite.SetOpacity(0.7 + 0.3 * Math.Sin(frame / 14));
+}
+Plymouth.SetRefreshFunction(refresh_callback);

@@ -14,7 +14,7 @@ gvfs-backends
 gvfs-fuse
 nautilus
 file-roller
-gnome-console
+ptyxis
 gnome-text-editor
 gnome-calculator
 gnome-calendar
@@ -37,6 +37,8 @@ gnome-software-plugin-flatpak
 flatpak
 
 # Fonts and icons
+papirus-icon-theme
+fonts-jetbrains-mono
 fonts-noto-core
 fonts-noto-cjk
 fonts-noto-color-emoji

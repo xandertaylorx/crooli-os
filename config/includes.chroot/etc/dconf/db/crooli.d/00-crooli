@@ -4,7 +4,9 @@
 [org/gnome/desktop/interface]
 font-name='Crooli Sans 11'
 document-font-name='Crooli Sans 11'
-monospace-font-name='Noto Sans Mono 11'
+monospace-font-name='JetBrains Mono 11'
+icon-theme='Papirus-Dark'
+cursor-size=24
 font-antialiasing='rgba'
 font-hinting='slight'
 accent-color='blue'
@@ -39,17 +41,18 @@ dynamic-workspaces=true
 edge-tiling=true
 
 [org/gnome/shell]
-enabled-extensions=['dash-to-dock@micxgx.gmail.com', 'appindicatorsupport@rgcjonas.gmail.com']
+enabled-extensions=['crooli-theme@crooli.com', 'dash-to-dock@micxgx.gmail.com', 'appindicatorsupport@rgcjonas.gmail.com']
 favorite-apps=['crooli-install.desktop', 'firefox-esr.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop', 'org.gnome.Calendar.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.Settings.desktop']
 welcome-dialog-last-shown-version='99'
 
 [org/gnome/shell/extensions/dash-to-dock]
 dock-position='BOTTOM'
-dock-fixed=false
-intellihide=true
-intellihide-mode='FOCUS_APPLICATION_WINDOWS'
+dock-fixed=true
+intellihide=false
 extend-height=false
-dash-max-icon-size=52
+dash-max-icon-size=56
+icon-size-fixed=true
+height-fraction=0.9
 show-trash=true
 show-mounts=false
 show-show-apps-button=true
@@ -67,6 +70,9 @@ disable-overview-on-startup=true
 
 [org/gnome/nautilus/preferences]
 default-folder-viewer='icon-view'
+show-image-thumbnails='always'
+date-time-format='simple'
+open-folder-on-dnd-hover=true
 
 [org/gnome/nautilus/icon-view]
 default-zoom-level='medium'
@@ -89,3 +95,12 @@ send-software-usage-stats=false
 remove-old-trash-files=true
 remove-old-temp-files=true
 old-files-age=uint32 30
+
+[org/gnome/Ptyxis]
+palette='crooli'
+interface-style='dark'
+use-system-font=false
+font-name='JetBrains Mono 12'
+default-columns=100
+default-rows=28
+restore-session=false

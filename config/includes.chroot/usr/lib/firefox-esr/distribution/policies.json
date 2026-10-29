@@ -1,0 +1,15 @@
+{
+  "policies": {
+    "Homepage": {
+      "URL": "https://crooli.com",
+      "StartPage": "homepage"
+    },
+    "DisableTelemetry": true,
+    "DisableFirefoxStudies": true,
+    "DisablePocket": true,
+    "DontCheckDefaultBrowser": true,
+    "OverrideFirstRunPage": "",
+    "OverridePostUpdatePage": "",
+    "NoDefaultBookmarks": true
+  }
+}

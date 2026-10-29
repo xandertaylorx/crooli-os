@@ -1,0 +1,94 @@
+/* Crooli OS shell styling.
+   Ink #0a0a0a, Graphite #171717, Paper #fff, Mist #a1a1a1, Signal #3291ff. */
+
+/* ---- Top bar ---------------------------------------------------------- */
+#panel {
+  background-color: rgba(10, 10, 10, 0.80);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+  font-weight: 500;
+  height: 2.3em;
+}
+#panel .panel-button {
+  color: #ededed;
+  border-radius: 8px;
+  margin: 4px 2px;
+  padding: 0 10px;
+  transition-duration: 150ms;
+}
+#panel .panel-button:hover,
+#panel .panel-button:focus,
+#panel .panel-button:active,
+#panel .panel-button:checked {
+  background-color: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+  box-shadow: none;
+}
+#panel .panel-button.clock-display .clock { font-weight: 600; }
+#panel .panel-button.crooli-menu-button { padding: 0 11px; }
+#panel .crooli-logo { icon-size: 16px; }
+#panel .system-status-icon, #panel .power-status { icon-size: 16px; }
+
+/* ---- Menus and quick settings ---------------------------------------- */
+.popup-menu-content,
+.quick-settings,
+.calendar-popup .popup-menu-content {
+  background-color: rgba(15, 15, 15, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  color: #ededed;
+}
+.popup-menu-item {
+  border-radius: 8px;
+  margin: 1px 6px;
+  padding: 6px 10px;
+}
+.popup-menu-item:hover,
+.popup-menu-item:focus,
+.popup-menu-item:active,
+.popup-menu-item.selected {
+  background-color: rgba(255, 255, 255, 0.09);
+  color: #ffffff;
+}
+.popup-separator-menu-item .popup-separator-menu-item-separator,
+.popup-separator-menu-item { background-color: rgba(255, 255, 255, 0.08); }
+.quick-toggle { border-radius: 12px; }
+.quick-toggle:checked,
+.quick-toggle:checked:hover { background-color: #0a6cf0; color: #ffffff; }
+.quick-slider .slider { -barlevel-active-background-color: #3291ff; -barlevel-active-border-color: #3291ff; }
+.slider { -barlevel-active-background-color: #3291ff; -barlevel-active-border-color: #3291ff; }
+.calendar-today, .calendar-today:selected { background-color: #0a6cf0; color: #ffffff; }
+.datemenu-today-button .date-label { font-weight: 600; }
+
+/* ---- Notifications ---------------------------------------------------- */
+.notification-banner, .message {
+  background-color: #171717;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  color: #ededed;
+}
+.message:hover { background-color: #1f1f1f; }
+
+/* ---- Overview and dock ------------------------------------------------ */
+.search-entry {
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+}
+.search-entry:focus { border-color: #3291ff; }
+.app-well-app:hover .overview-icon, .app-well-app:focus .overview-icon,
+.overview-tile:hover, .overview-tile:focus { background-color: rgba(255, 255, 255, 0.09); border-radius: 18px; }
+.dash-background,
+#dashtodockContainer .dash-background,
+#dash .dash-background {
+  background-color: rgba(10, 10, 10, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
+#dashtodockContainer .app-well-app .overview-icon,
+#dash .app-well-app .overview-icon { border-radius: 14px; }
+#dashtodockContainer .app-well-app:hover .overview-icon,
+#dashtodockContainer .app-well-app:focus .overview-icon { background-color: rgba(255, 255, 255, 0.12); }
+.app-well-app-running-dot { background-color: #ffffff; border-radius: 99px; }

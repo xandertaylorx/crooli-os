@@ -1,0 +1,7 @@
+{
+  "uuid": "crooli-theme@crooli.com",
+  "name": "Crooli OS Shell",
+  "description": "The Crooli look for the top bar, menus and dock, plus the Crooli menu.",
+  "shell-version": ["48", "49"],
+  "url": "https://os.crooli.com"
+}

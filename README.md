@@ -25,7 +25,8 @@ Crooli Sans typeface.
 | | |
 |---|---|
 | **Installer** | Calamares with five short screens. Erase-and-install is the default; encryption is one checkbox. |
-| **Desktop** | GNOME with a bottom dock, window buttons on the left, dark mode by default, no hot corners. |
+| **Desktop** | GNOME restyled as Crooli: a quiet top bar with a Crooli menu, a floating dock, dark mode by default, Crooli Sans and Papirus icons. |
+| **Look** | One colour system across the shell, Files, Settings, the terminal (Ptyxis), the installer and the boot screen, in dark and light. |
 | **Apps** | GNOME Software with Flathub built in, plus Firefox, Files, Calendar, Text Editor, Photos, Camera and more. |
 | **Updates** | Security updates install in the background (`unattended-upgrades`). App updates download automatically. |
 | **Lightweight** | Minimal GNOME, no recommended packages pulled in, compressed RAM swap (zram) instead of a swap partition. |

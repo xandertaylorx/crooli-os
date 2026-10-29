@@ -40,6 +40,39 @@ jobs:
           lb config
           lb build
 
+      - name: Verify image contents
+        run: |
+          SQ=$(find binary/live -name 'filesystem.squashfs' | head -1)
+          test -n "$SQ" || { echo "no squashfs found"; exit 1; }
+          unsquashfs -ll "$SQ" > /tmp/files.txt
+          unsquashfs -cat "$SQ" var/lib/dpkg/status > /tmp/dpkg-status
+          fail=0
+          for p in \
+            usr/share/gnome-shell/extensions/crooli-theme@crooli.com/extension.js \
+            usr/share/gnome-shell/extensions/crooli-theme@crooli.com/stylesheet.css \
+            usr/share/gnome-shell/extensions/crooli-theme@crooli.com/metadata.json \
+            etc/dconf/db/crooli etc/dconf/db/gdm \
+            etc/skel/.config/gtk-4.0/gtk.css etc/skel/.config/gtk-3.0/gtk.css \
+            usr/share/crooli/theme/gtk4-light.css \
+            usr/share/plymouth/themes/crooli/logo.png usr/share/plymouth/themes/crooli/crooli.script \
+            usr/share/icons/hicolor/256x256/apps/crooli-os.png \
+            usr/share/icons/Papirus-Dark/index.theme \
+            usr/share/fonts/truetype/crooli-sans/CrooliSans-Variable.ttf \
+            usr/share/org.gnome.Ptyxis/palettes/crooli.palette \
+            usr/bin/crooli-welcome usr/bin/crooli-install \
+            usr/sbin/crooli-bootloader-config usr/share/crooli/bootloader/bios usr/share/crooli/bootloader/efi \
+            etc/calamares/settings.conf etc/calamares/modules/users.conf; do
+            grep -q "squashfs-root/$p" /tmp/files.txt || { echo "MISSING: $p"; fail=1; }
+          done
+          for pkg in user-setup live-config live-boot calamares gdm3 ptyxis flatpak \
+            papirus-icon-theme gnome-shell-extension-dashtodock gnome-software nautilus; do
+            grep -q "^Package: $pkg\$" /tmp/dpkg-status || { echo "PACKAGE NOT INSTALLED: $pkg"; fail=1; }
+          done
+          unsquashfs -cat "$SQ" usr/lib/os-release | grep -q 'NAME="Crooli OS"' || { echo "os-release not Crooli"; fail=1; }
+          unsquashfs -cat "$SQ" etc/dconf/db/crooli | grep -aq 'Papirus-Dark' || { echo "dconf db missing Crooli settings"; fail=1; }
+          [ "$fail" = 0 ] && echo "Image contents verified."
+          exit $fail
+
       - name: Checksum
         run: |
           ISO=$(ls *.iso)
@@ -68,7 +101,16 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
+          name: Crooli OS 1.0
+          body: |
+            **Crooli OS 1.0**, the first release. A calm, fast desktop for people who have never used Linux.
+
+            1. Download the `.iso` file below.
+            2. Write it to a USB stick with [balenaEtcher](https://etcher.balena.io).
+            3. Start your computer from the USB stick, try it, then click **Install Crooli OS** in the dock.
+
+            Checksum: see the `.sha256` file. Needs a 64-bit PC with 2 GB of memory and 16 GB of storage.
+            More at https://os.crooli.com
           files: |
             *.iso
             *.iso.sha256
-          generate_release_notes: true

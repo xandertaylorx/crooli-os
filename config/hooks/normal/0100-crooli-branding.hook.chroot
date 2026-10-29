@@ -38,10 +38,8 @@ rsvg-convert -w 256 -h 256 /usr/share/icons/hicolor/scalable/apps/crooli-os.svg 
 cp "$B/wordmark-installer.png" "$C/welcome.png"
 
 # --- Boot splash ----------------------------------------------------------
-# bgrt shows the computer maker's logo with a quiet spinner; the Crooli
-# wordmark sits underneath as the watermark.
-cp "$B/wordmark-boot.png" /usr/share/plymouth/themes/spinner/watermark.png
-plymouth-set-default-theme bgrt
+rsvg-convert -w 128 -h 128 "$B/icon-white.svg" -o /usr/share/plymouth/themes/crooli/logo.png
+plymouth-set-default-theme -R crooli
 
 # --- Login screen ---------------------------------------------------------
 # desktop-base (pulled in by GNOME) brands the login screen as Debian. Add

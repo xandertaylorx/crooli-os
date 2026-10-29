@@ -150,7 +150,8 @@ h1, h2, h3, h4, p { margin: 0; }
   padding: 0 1.6cqw; background: rgb(0 0 0 / .55);
   font-size: max(9px, 1.25cqw); font-weight: 600; color: #fff;
 }
-.tb-left { opacity: .9; }
+.tb-left { display: flex; align-items: center; opacity: .95; }
+.tb-left img { width: max(10px, 1.4cqw); height: max(10px, 1.4cqw); }
 .tb-clock { position: absolute; left: 50%; transform: translateX(-50%); }
 .tb-right { display: flex; gap: .9cqw; align-items: center; }
 .tb-right svg { height: max(9px, 1.3cqw); width: auto; }
@@ -219,6 +220,7 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 
 .grid { margin-top: 56px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
+.grid-3 { margin-top: 56px; }
 .card { background: var(--ink); padding: 32px; transition: background .3s var(--ease); }
 .card:hover { background: #0f0f0f; }
 .card .icon {

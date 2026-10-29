@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Crooli OS
+Description=The Crooli mark on Ink
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/crooli
+ScriptFile=/usr/share/plymouth/themes/crooli/crooli.script
