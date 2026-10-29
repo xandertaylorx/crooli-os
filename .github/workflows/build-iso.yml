@@ -4,10 +4,15 @@ on:
   push:
     branches: [main]
     tags: ["v*"]
-    paths-ignore: ["web/**", "**.md"]
+    paths-ignore: ["web/**", "**.md", "vercel.json"]
   pull_request:
-    paths-ignore: ["web/**", "**.md"]
+    paths-ignore: ["web/**", "**.md", "vercel.json"]
   workflow_dispatch:
+
+# A newer push replaces any build still running for the same branch.
+concurrency:
+  group: iso-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -24,7 +29,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y --no-install-recommends \
-            git ca-certificates live-build debootstrap squashfs-tools xorriso \
+            git ca-certificates apt-utils live-build debootstrap squashfs-tools xorriso \
             grub-efi-amd64-bin grub-pc-bin mtools dosfstools \
             syslinux syslinux-common isolinux
 

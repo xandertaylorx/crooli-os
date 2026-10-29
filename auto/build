@@ -1,4 +1,9 @@
 #!/bin/sh
 set -e
 
-lb build noauto "${@}" 2>&1 | tee build.log
+# Keep a log, but fail with live-build's own exit code (a plain pipe to tee
+# would always report success).
+{ rc=0; lb build noauto "${@}" 2>&1 || rc=$?; echo "$rc" > .build-status; } | tee build.log
+status=$(cat .build-status)
+rm -f .build-status
+exit "$status"

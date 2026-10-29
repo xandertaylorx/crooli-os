@@ -4,7 +4,7 @@ set -e
 
 # --- Identity -------------------------------------------------------------
 # Divert Debian's os-release so base-files upgrades don't undo it.
-dpkg-divert --quiet --local --rename --add /usr/lib/os-release
+dpkg-divert --quiet --local --no-rename --add /usr/lib/os-release
 cat > /usr/lib/os-release <<'EOF'
 PRETTY_NAME="Crooli OS 1.0"
 NAME="Crooli OS"

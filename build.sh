@@ -40,7 +40,7 @@ exec "$ENGINE" run --rm --privileged \
 		set -e
 		apt-get update
 		apt-get install -y --no-install-recommends \
-			live-build debootstrap squashfs-tools xorriso \
+			apt-utils live-build debootstrap squashfs-tools xorriso \
 			grub-efi-amd64-bin grub-pc-bin mtools dosfstools \
 			syslinux syslinux-common isolinux ca-certificates
 		lb clean

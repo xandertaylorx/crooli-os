@@ -41,3 +41,4 @@ config/rootfs/
 
 .claude/
 __pycache__/
+.build-status
