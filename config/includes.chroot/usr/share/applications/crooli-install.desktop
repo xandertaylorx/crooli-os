@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Install Crooli OS
+GenericName=Installer
+Comment=Put Crooli OS on this computer
+Exec=crooli-install
+Icon=crooli-os
+Terminal=false
+Categories=System;
+Keywords=install;installer;setup;
+StartupNotify=true

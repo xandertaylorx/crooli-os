@@ -1,0 +1,63 @@
+# Kernel, live system and boot
+linux-image-amd64
+live-boot
+live-config
+live-config-systemd
+systemd-sysv
+systemd-zram-generator
+plymouth
+plymouth-themes
+sudo
+locales
+console-setup
+keyboard-configuration
+tzdata
+ca-certificates
+curl
+
+# Bootloader pieces the installer needs (the matching grub package for
+# BIOS or UEFI is pulled from the ISO pool at install time)
+grub-common
+grub2-common
+grub-pc-bin
+grub-efi-amd64-bin
+efibootmgr
+dosfstools
+mtools
+cryptsetup
+os-prober
+
+# Hardware support
+firmware-linux
+firmware-linux-nonfree
+firmware-misc-nonfree
+firmware-iwlwifi
+firmware-realtek
+firmware-atheros
+firmware-brcm80211
+firmware-intel-sound
+firmware-sof-signed
+intel-microcode
+amd64-microcode
+mesa-vulkan-drivers
+libgl1-mesa-dri
+fwupd
+
+# Networking, sound, bluetooth, printing
+network-manager
+wpasupplicant
+pipewire
+pipewire-pulse
+pipewire-alsa
+wireplumber
+bluez
+cups
+cups-pk-helper
+ipp-usb
+avahi-daemon
+
+# Updates that take care of themselves
+unattended-upgrades
+apt-listchanges
+packagekit
+power-profiles-daemon

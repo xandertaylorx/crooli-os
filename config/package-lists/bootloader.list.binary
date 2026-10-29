@@ -1,0 +1,6 @@
+# Shipped in the ISO's package pool so the installer can set up the right
+# bootloader offline (BIOS or UEFI, with Secure Boot support).
+grub-pc
+grub-efi-amd64
+grub-efi-amd64-signed
+shim-signed

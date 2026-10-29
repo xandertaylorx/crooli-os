@@ -1,0 +1,5 @@
+#!/bin/sh
+# Start the Crooli OS installer. Calamares needs root; the live user has
+# passwordless sudo, so this never asks for a password.
+exec sudo --preserve-env=WAYLAND_DISPLAY,XDG_RUNTIME_DIR,DISPLAY,XAUTHORITY,QT_QPA_PLATFORM \
+	calamares "$@"

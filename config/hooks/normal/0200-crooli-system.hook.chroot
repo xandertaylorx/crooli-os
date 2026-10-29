@@ -1,0 +1,31 @@
+#!/bin/sh
+# System services and app sources.
+set -e
+
+# Flathub powers the App Store alongside Debian packages.
+flatpak remote-add --if-not-exists --system flathub \
+	https://dl.flathub.org/repo/flathub.flatpakrepo
+
+systemctl enable NetworkManager.service
+systemctl enable bluetooth.service
+systemctl enable cups.service
+systemctl enable power-profiles-daemon.service
+systemctl enable unattended-upgrades.service
+systemctl enable fwupd-refresh.timer || true
+
+# Hide developer-only launchers from the app grid.
+for app in \
+	org.gnome.Extensions \
+	yelp \
+	display-im6.q16 \
+	debian-xterm \
+	debian-uxterm \
+	nm-connection-editor \
+	; do
+	f=/usr/share/applications/$app.desktop
+	if [ -f "$f" ]; then
+		sed -i '/^\[Desktop Entry\]/a NoDisplay=true' "$f"
+	fi
+done
+
+chmod 0755 /usr/bin/crooli-install /usr/bin/crooli-welcome /usr/sbin/crooli-bootloader-config

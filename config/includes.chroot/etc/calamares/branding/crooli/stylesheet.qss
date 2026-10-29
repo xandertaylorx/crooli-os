@@ -1,0 +1,52 @@
+/* Crooli brand: Ink and Paper carry everything, Signal blue for actions. */
+QWidget {
+    font-family: "Crooli Sans";
+    font-size: 11pt;
+}
+
+#mainApp, QStackedWidget {
+    background-color: #0A0A0A;
+    color: #EDEDED;
+}
+
+QLabel { color: #EDEDED; }
+
+QPushButton {
+    background-color: #171717;
+    color: #EDEDED;
+    border: 1px solid #2A2A2A;
+    border-radius: 8px;
+    padding: 8px 18px;
+}
+QPushButton:hover { background-color: #222222; }
+QPushButton:default, #view-button-next {
+    background-color: #FFFFFF;
+    color: #0A0A0A;
+    border: none;
+}
+QPushButton:disabled { color: #6F6F6F; }
+
+QLineEdit, QComboBox, QListView, QTreeView {
+    background-color: #171717;
+    color: #EDEDED;
+    border: 1px solid #2A2A2A;
+    border-radius: 8px;
+    padding: 6px;
+    selection-background-color: #0A6CF0;
+}
+QLineEdit:focus, QComboBox:focus { border-color: #3291FF; }
+
+QRadioButton, QCheckBox { color: #EDEDED; }
+
+QProgressBar {
+    background-color: #171717;
+    border: none;
+    border-radius: 4px;
+    height: 8px;
+    text-align: center;
+    color: transparent;
+}
+QProgressBar::chunk {
+    background-color: #3291FF;
+    border-radius: 4px;
+}

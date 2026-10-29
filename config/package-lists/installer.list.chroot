@@ -1,0 +1,8 @@
+# Calamares graphical installer (removed from the installed system)
+calamares
+qml6-module-qtquick
+qml6-module-qtquick-controls
+qml6-module-qtquick-layouts
+qml6-module-qtquick-window
+rsync
+squashfs-tools

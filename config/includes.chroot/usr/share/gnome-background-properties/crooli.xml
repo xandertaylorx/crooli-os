@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
+<wallpapers>
+  <wallpaper deleted="false">
+    <name>Crooli OS</name>
+    <filename>/usr/share/backgrounds/crooli/crooli-os-light.svg</filename>
+    <filename-dark>/usr/share/backgrounds/crooli/crooli-os-dark.svg</filename-dark>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#FFFFFF</pcolor>
+    <scolor>#0A0A0A</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Crooli Loops</name>
+    <filename>/usr/share/backgrounds/crooli/crooli-light-loops.png</filename>
+    <filename-dark>/usr/share/backgrounds/crooli/crooli-dark-loops.png</filename-dark>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#FFFFFF</pcolor>
+    <scolor>#0A0A0A</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Crooli Orbits</name>
+    <filename>/usr/share/backgrounds/crooli/crooli-dark-orbits.png</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#0A0A0A</pcolor>
+    <scolor>#0A0A0A</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Crooli Waves</name>
+    <filename>/usr/share/backgrounds/crooli/crooli-light-waves.png</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#FFFFFF</pcolor>
+    <scolor>#FFFFFF</scolor>
+  </wallpaper>
+</wallpapers>

@@ -1,0 +1,11 @@
+[org/gnome/login-screen]
+logo='/usr/share/crooli/wordmark-login.png'
+
+[org/gnome/desktop/interface]
+font-name='Crooli Sans 11'
+color-scheme='prefer-dark'
+clock-format='12h'
+show-battery-percentage=true
+
+[org/gnome/desktop/peripherals/touchpad]
+tap-to-click=true

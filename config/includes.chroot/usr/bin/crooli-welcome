@@ -1,0 +1,189 @@
+#!/usr/bin/python3
+"""Crooli Welcome: the first thing people see after logging in.
+
+In the live session it offers to install Crooli OS. On an installed system
+it opens once, with shortcuts to the handful of things new users look for.
+"""
+import os
+import subprocess
+import sys
+
+import gi
+
+gi.require_version("Gtk", "4.0")
+gi.require_version("Adw", "1")
+from gi.repository import Adw, Gdk, Gio, Gtk  # noqa: E402
+
+APP_ID = "com.crooli.Welcome"
+IS_LIVE = os.path.isdir("/run/live/medium")
+DONE_FLAG = os.path.join(
+    os.environ.get("XDG_CONFIG_HOME", os.path.expanduser("~/.config")),
+    "crooli", "welcome-done",
+)
+HELP_URL = "https://github.com/xandertaylorx/crooli-os/discussions"
+
+CSS = """
+.hero-title { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; }
+.hero-body { font-size: 15px; opacity: 0.7; }
+.tile { padding: 18px; border-radius: 12px; }
+.tile-title { font-weight: 600; font-size: 15px; }
+.tile-body { opacity: 0.65; }
+.pill { padding: 10px 26px; border-radius: 999px; font-weight: 600; }
+.ink-button { background: #ffffff; color: #0a0a0a; }
+.ink-button:hover { background: #ededed; }
+"""
+
+
+def launch(*argv):
+    subprocess.Popen(argv, start_new_session=True)
+
+
+def open_app(desktop_id):
+    info = Gio.DesktopAppInfo.new(desktop_id)
+    if info:
+        info.launch([], None)
+
+
+class Tile(Gtk.Button):
+    def __init__(self, icon, title, body, action):
+        super().__init__()
+        self.add_css_class("card")
+        self.add_css_class("tile")
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        img = Gtk.Image.new_from_icon_name(icon)
+        img.set_pixel_size(28)
+        img.set_halign(Gtk.Align.START)
+        t = Gtk.Label(label=title, xalign=0)
+        t.add_css_class("tile-title")
+        b = Gtk.Label(label=body, xalign=0, wrap=True)
+        b.add_css_class("tile-body")
+        for w in (img, t, b):
+            box.append(w)
+        self.set_child(box)
+        self.connect("clicked", lambda *_: action())
+
+
+class Welcome(Adw.ApplicationWindow):
+    def __init__(self, app):
+        super().__init__(application=app, title="Welcome to Crooli OS")
+        self.set_default_size(720, 560 if not IS_LIVE else 460)
+
+        header = Adw.HeaderBar()
+        header.set_show_title(False)
+        body = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=24)
+        body.set_margin_top(12)
+        body.set_margin_bottom(36)
+        body.set_margin_start(40)
+        body.set_margin_end(40)
+
+        mark = Gtk.Image.new_from_icon_name("crooli-os")
+        mark.set_pixel_size(80)
+        body.append(mark)
+
+        title = Gtk.Label(label="Welcome to Crooli OS")
+        title.add_css_class("hero-title")
+        body.append(title)
+
+        subtitle = Gtk.Label(
+            label=(
+                "You're trying Crooli OS from a USB stick. Nothing on this "
+                "computer has changed. Install it when you're ready."
+                if IS_LIVE
+                else "Everything is set up. Here are a few places to start."
+            ),
+            wrap=True,
+            justify=Gtk.Justification.CENTER,
+        )
+        subtitle.add_css_class("hero-body")
+        body.append(subtitle)
+
+        if IS_LIVE:
+            body.append(self._live_actions())
+        else:
+            body.append(self._tiles())
+
+        toolbar = Adw.ToolbarView()
+        toolbar.add_top_bar(header)
+        toolbar.set_content(body)
+        self.set_content(toolbar)
+
+    def _live_actions(self):
+        row = Gtk.Box(spacing=12, halign=Gtk.Align.CENTER)
+        install = Gtk.Button(label="Install Crooli OS")
+        install.add_css_class("pill")
+        install.add_css_class("ink-button")
+        install.connect("clicked", self._install)
+        keep = Gtk.Button(label="Keep trying it")
+        keep.add_css_class("pill")
+        keep.connect("clicked", lambda *_: self.close())
+        row.append(install)
+        row.append(keep)
+        return row
+
+    def _install(self, *_):
+        launch("crooli-install")
+        self.close()
+
+    def _tiles(self):
+        style = Adw.StyleManager.get_default()
+
+        def toggle_theme():
+            settings = Gio.Settings.new("org.gnome.desktop.interface")
+            dark = settings.get_string("color-scheme") == "prefer-dark"
+            settings.set_string("color-scheme", "default" if dark else "prefer-dark")
+
+        grid = Gtk.Grid(column_spacing=12, row_spacing=12, column_homogeneous=True)
+        tiles = [
+            Tile("org.gnome.Software", "Get apps",
+                 "Browse and install free apps in one click.",
+                 lambda: open_app("org.gnome.Software.desktop")),
+            Tile("weather-clear-night-symbolic" if style.get_dark() else "weather-clear-symbolic",
+                 "Light or dark",
+                 "Switch the look of your whole computer.",
+                 toggle_theme),
+            Tile("network-wireless-symbolic", "Wi-Fi & settings",
+                 "Connect to the internet, add printers, change your wallpaper.",
+                 lambda: open_app("org.gnome.Settings.desktop")),
+            Tile("software-update-available-symbolic", "Check for updates",
+                 "Updates install on their own, but you can check now.",
+                 lambda: launch("gnome-software", "--mode=updates")),
+            Tile("folder-documents-symbolic", "Your files",
+                 "Documents, downloads, photos and USB drives.",
+                 lambda: open_app("org.gnome.Nautilus.desktop")),
+            Tile("help-browser-symbolic", "Get help",
+                 "Ask the Crooli community a question.",
+                 lambda: Gtk.UriLauncher.new(HELP_URL).launch(self, None, None)),
+        ]
+        for i, tile in enumerate(tiles):
+            grid.attach(tile, i % 3, i // 3, 1, 1)
+        return grid
+
+
+class App(Adw.Application):
+    def __init__(self):
+        super().__init__(application_id=APP_ID,
+                         flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE)
+
+    def do_command_line(self, command_line):
+        autostart = "--autostart" in command_line.get_arguments()
+        if autostart and not IS_LIVE and os.path.exists(DONE_FLAG):
+            return 0
+        self.activate()
+        if autostart and not IS_LIVE:
+            os.makedirs(os.path.dirname(DONE_FLAG), exist_ok=True)
+            open(DONE_FLAG, "w").close()
+        return 0
+
+    def do_activate(self):
+        provider = Gtk.CssProvider()
+        provider.load_from_string(CSS)
+        Gtk.StyleContext.add_provider_for_display(
+            Gdk.Display.get_default(), provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+        )
+        win = self.props.active_window or Welcome(self)
+        win.present()
+
+
+if __name__ == "__main__":
+    sys.exit(App().run(sys.argv))
