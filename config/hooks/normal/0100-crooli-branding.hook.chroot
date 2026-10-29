@@ -14,7 +14,7 @@ VERSION_CODENAME=trixie
 ID=crooli
 ID_LIKE=debian
 LOGO=crooli-os
-HOME_URL="https://crooli.com"
+HOME_URL="https://os.crooli.com"
 SUPPORT_URL="https://github.com/xandertaylorx/crooli-os/discussions"
 BUG_REPORT_URL="https://github.com/xandertaylorx/crooli-os/issues"
 EOF

@@ -17,7 +17,7 @@ strings:
     versionedName:       "Crooli OS 1.0"
     shortVersionedName:  "Crooli OS 1.0"
     bootloaderEntryName: "Crooli OS"
-    productUrl:          "https://crooli.com"
+    productUrl:          "https://os.crooli.com"
     supportUrl:          "https://github.com/xandertaylorx/crooli-os/discussions"
     knownIssuesUrl:      "https://github.com/xandertaylorx/crooli-os/issues"
     releaseNotesUrl:     "https://github.com/xandertaylorx/crooli-os/releases"

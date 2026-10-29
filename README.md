@@ -6,7 +6,8 @@
 
 <p align="center">
   A calm, fast desktop for people who don't want to think about their operating system.<br>
-  Made by <a href="https://crooli.com">Crooli</a>. Free and open source.
+  Made by <a href="https://crooli.com">Crooli</a>. Free and open source.<br>
+  <a href="https://os.crooli.com"><b>os.crooli.com</b></a>
 </p>
 
 ---
@@ -45,7 +46,8 @@ config/
     etc/dconf/          desktop defaults (dock, fonts, wallpaper, ...)
     usr/bin/            crooli-welcome, crooli-install
     usr/share/          wallpapers, logos, Crooli Sans
-web/             the Crooli OS website (static, deployed with GitHub Pages)
+web/             the Crooli OS website (static, deployed to os.crooli.com by Vercel)
+vercel.json      tells Vercel to serve web/ as-is, with no build step
 build.sh         one-command build
 ```
 
