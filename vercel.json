@@ -6,7 +6,6 @@
   "outputDirectory": "web",
   "cleanUrls": true,
   "trailingSlash": false,
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- web vercel.json",
   "redirects": [
     { "source": "/download", "destination": "https://github.com/xandertaylorx/crooli-os/releases/latest", "permanent": false },
     { "source": "/github", "destination": "https://github.com/xandertaylorx/crooli-os", "permanent": false }
