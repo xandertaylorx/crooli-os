@@ -14,17 +14,11 @@ if ("IntersectionObserver" in window) {
   items.forEach((el) => el.classList.add("in"));
 }
 
-// Live clock in the desktop preview.
-const clock = document.getElementById("clock");
-function tick() {
-  const now = new Date();
-  const date = now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
-  const time = now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
-  clock.textContent = `${date} ${time}`;
-}
-if (clock) {
-  tick();
-  setInterval(tick, 30_000);
-}
+// Screenshot tabs.
+const tabs = document.querySelectorAll(".shot-tabs button");
+tabs.forEach((tab) => tab.addEventListener("click", () => {
+  tabs.forEach((t) => t.setAttribute("aria-selected", String(t === tab)));
+  document.querySelectorAll(".shot").forEach((img) => img.classList.toggle("on", img.id === tab.dataset.shot));
+}));
 
 document.getElementById("year").textContent = new Date().getFullYear();

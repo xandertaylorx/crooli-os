@@ -132,102 +132,20 @@ h1, h2, h3, h4, p { margin: 0; }
 .hero-meta span { margin: 0 6px; opacity: .6; }
 .cta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 
-/* ---------- Desktop mockup ----------
-   Built from the OS's own values (stylesheet.css, gtk.css and dconf), drawn
-   at 1440x900 and scaled with --u so it matches a real screenshot. */
+/* ---------- Screenshots (real captures from the OS) ---------- */
 .screen {
   position: relative; z-index: 1; margin: clamp(56px, 8vw, 88px) auto 0; max-width: 1040px;
   border-radius: 16px; padding: 10px;
   background: linear-gradient(180deg, #262626, #121212);
   box-shadow: 0 0 0 1px var(--line-strong), 0 40px 120px -20px rgb(10 108 240 / .35), 0 30px 60px -30px #000;
 }
-.desktop {
-  --u: calc(100cqw / 1440);
-  position: relative; aspect-ratio: 16 / 10; border-radius: 8px; overflow: hidden;
-  background: #0a0a0a url("assets/wallpaper-dark.svg") center / cover no-repeat;
-  container-type: inline-size;
-  font-size: calc(var(--u) * 14.67);
-  color: #ededed;
-}
-.desktop svg { fill: none; }
-.desktop svg use { color: inherit; }
-
-/* Top bar: rgba(10,10,10,.8), 2.3em, weight 500 */
-.topbar {
-  position: absolute; inset: 0 0 auto; height: calc(var(--u) * 34);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 calc(var(--u) * 6);
-  background: rgba(10, 10, 10, 0.80);
-  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08);
-  font-weight: 500;
-}
-.tb-logo { display: grid; place-items: center; padding: 0 calc(var(--u) * 11); height: calc(var(--u) * 26); border-radius: calc(var(--u) * 8); }
-.tb-logo img { width: calc(var(--u) * 16); height: calc(var(--u) * 16); }
-.tb-clock { position: absolute; left: 50%; transform: translateX(-50%); font-weight: 600; white-space: nowrap; }
-.tb-right { display: flex; align-items: center; gap: calc(var(--u) * 10); padding: 0 calc(var(--u) * 12); height: calc(var(--u) * 26); border-radius: calc(var(--u) * 8); }
-.tb-right svg { width: calc(var(--u) * 16); height: calc(var(--u) * 16); }
-.tb-right svg.batt { width: calc(var(--u) * 20); }
-.tb-right em { font-style: normal; font-size: calc(var(--u) * 13.5); }
-
-/* Windows: libadwaita dark with the Crooli colours */
-.win {
-  position: absolute; overflow: hidden;
-  background: #0a0a0a; border-radius: calc(var(--u) * 15);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.09), 0 calc(var(--u) * 24) calc(var(--u) * 60) rgba(0, 0, 0, 0.55);
-}
-.hb {
-  height: calc(var(--u) * 47); display: flex; align-items: center; gap: calc(var(--u) * 10);
-  padding: 0 calc(var(--u) * 10); background: #0a0a0a;
-  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08);
-}
-.hb svg { width: calc(var(--u) * 16); height: calc(var(--u) * 16); color: #ededed; }
-.hb svg.dim { opacity: .35; }
-.hb-nav, .hb-tools { display: flex; align-items: center; gap: calc(var(--u) * 6); }
-.hb-nav svg, .hb-tools svg { padding: calc(var(--u) * 7); box-sizing: content-box; border-radius: calc(var(--u) * 8); background: rgba(255,255,255,.07); }
-.hb-nav svg:first-child { border-radius: calc(var(--u) * 8) 0 0 calc(var(--u) * 8); }
-.hb-nav svg:last-child { border-radius: 0 calc(var(--u) * 8) calc(var(--u) * 8) 0; }
-.hb-tools { margin-left: auto; }
-.hb-tools svg { background: none; }
-.hb-path {
-  display: flex; align-items: center; gap: calc(var(--u) * 7); font-weight: 700;
-  padding: calc(var(--u) * 6) calc(var(--u) * 12); border-radius: calc(var(--u) * 8); background: rgba(255,255,255,.07);
-}
-.files { left: calc(var(--u) * 120); top: calc(var(--u) * 92); width: calc(var(--u) * 900); height: calc(var(--u) * 560); display: flex; flex-direction: column; }
-.fbody { flex: 1; display: flex; min-height: 0; }
-.side { list-style: none; margin: 0; padding: calc(var(--u) * 8) 0; width: calc(var(--u) * 230); background: #0d0d0d; box-shadow: inset -1px 0 0 rgba(255,255,255,.08); }
-.side li { display: flex; align-items: center; gap: calc(var(--u) * 12); height: calc(var(--u) * 36); margin: calc(var(--u) * 1) calc(var(--u) * 6); padding: 0 calc(var(--u) * 12); border-radius: calc(var(--u) * 8); }
-.side li svg { width: calc(var(--u) * 16); height: calc(var(--u) * 16); color: #bdbdbd; }
-.side li.gap { margin-top: calc(var(--u) * 10); }
-.side li.sel { background: rgba(10, 108, 240, 0.22); }
-.items { flex: 1; background: #0f0f0f; display: grid; grid-template-columns: repeat(4, 1fr); align-content: start; gap: calc(var(--u) * 14) 0; padding: calc(var(--u) * 26) calc(var(--u) * 14); }
-.items figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: calc(var(--u) * 6); }
-.items img { width: calc(var(--u) * 88); height: calc(var(--u) * 88); }
-.items figcaption { font-size: calc(var(--u) * 14); }
-
-/* Terminal: Ptyxis with the Crooli palette */
-.term { left: calc(var(--u) * 700); top: calc(var(--u) * 360); width: calc(var(--u) * 640); height: calc(var(--u) * 340); display: flex; flex-direction: column; }
-.hb-tab { display: grid; place-items: center; padding: calc(var(--u) * 7); border-radius: calc(var(--u) * 8); background: rgba(255,255,255,.07); }
-.hb-title { position: absolute; left: 50%; transform: translateX(-50%); font-weight: 700; }
-.tty {
-  margin: 0; flex: 1; padding: calc(var(--u) * 16) calc(var(--u) * 18); background: #0a0a0a; color: #ededed;
-  font: 500 calc(var(--u) * 16) / 1.45 var(--mono); white-space: pre; overflow: hidden;
-}
-.tty .g { color: #3ddc97; font-weight: 700; }
-.tty .b { color: #3291ff; font-weight: 700; }
-.tty .cur { display: inline-block; width: .6em; height: 1.1em; vertical-align: text-bottom; background: #3291ff; }
-
-/* Dock: dash-to-dock, bottom, icons 56px, rgba(10,10,10,.62), radius 20 */
-.dock {
-  position: absolute; left: 50%; bottom: calc(var(--u) * 10); transform: translateX(-50%);
-  display: flex; align-items: center; gap: calc(var(--u) * 6); padding: calc(var(--u) * 9) calc(var(--u) * 12);
-  background: rgba(10, 10, 10, 0.62); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: calc(var(--u) * 20);
-  box-shadow: 0 calc(var(--u) * 10) calc(var(--u) * 40) rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(calc(var(--u) * 14));
-}
-.dock img { width: calc(var(--u) * 56); height: calc(var(--u) * 56); }
-.dock .sep { width: 1px; height: calc(var(--u) * 44); margin: 0 calc(var(--u) * 4); background: rgba(255,255,255,.18); }
-.dock .apps { display: grid; place-items: center; width: calc(var(--u) * 56); height: calc(var(--u) * 56); }
-.dock .apps svg { width: calc(var(--u) * 26); height: calc(var(--u) * 26); color: #fff; }
+.shots { position: relative; aspect-ratio: 16 / 10; border-radius: 8px; overflow: hidden; background: #0a0a0a; }
+.shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .45s var(--ease); }
+.shot.on { opacity: 1; }
+.shot-tabs { position: relative; z-index: 1; display: flex; justify-content: center; gap: 4px; margin: 22px auto 0; padding: 4px; width: fit-content; max-width: 100%; border-radius: 999px; background: var(--graphite); box-shadow: inset 0 0 0 1px var(--line); }
+.shot-tabs button { appearance: none; border: 0; cursor: pointer; font: inherit; font-size: 14px; color: var(--mist); background: none; padding: 7px 16px; border-radius: 999px; transition: background .2s var(--ease), color .2s var(--ease); }
+.shot-tabs button:hover { color: var(--fg); }
+.shot-tabs button[aria-selected="true"] { background: var(--paper); color: var(--ink); font-weight: 500; }
 
 /* ---------- Statement ---------- */
 .statement { padding: clamp(64px, 10vw, 128px) var(--gutter); }
@@ -352,6 +270,5 @@ h1, h2, h3, h4, p { margin: 0; }
   .card { padding: 24px; }
   .cta { flex-direction: column; width: 100%; max-width: 320px; }
   .screen { padding: 5px; border-radius: 10px; }
-  .term { display: none; }
   .reqs { width: 100%; }
 }
