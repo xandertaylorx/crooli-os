@@ -18,9 +18,9 @@ if ("IntersectionObserver" in window) {
 const clock = document.getElementById("clock");
 function tick() {
   const now = new Date();
-  const day = now.toLocaleDateString(undefined, { weekday: "short" });
-  const time = now.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
-  clock.textContent = `${day} ${time}`;
+  const date = now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+  const time = now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  clock.textContent = `${date} ${time}`;
 }
 if (clock) {
   tick();

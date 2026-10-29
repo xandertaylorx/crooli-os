@@ -57,42 +57,91 @@
 
       <div class="wrap">
         <figure class="screen reveal" aria-label="The Crooli OS desktop">
+          <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+            <defs>
+              <symbol id="i-back" viewBox="0 0 16 16"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+              <symbol id="i-fwd" viewBox="0 0 16 16"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+              <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10.3 10.3L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+              <symbol id="i-grid" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="5" height="5" rx="1.2"/><rect x="9" y="2" width="5" height="5" rx="1.2"/><rect x="2" y="9" width="5" height="5" rx="1.2"/><rect x="9" y="9" width="5" height="5" rx="1.2"/></g></symbol>
+              <symbol id="i-menu" viewBox="0 0 16 16"><path d="M2.5 4h11M2.5 8h11M2.5 12h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+              <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+              <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.8V8l2.2 1.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+              <symbol id="i-star" viewBox="0 0 16 16"><path d="M8 2l1.8 3.7 4 .6-2.9 2.8.7 4L8 11.2 4.4 13.1l.7-4L2.2 6.3l4-.6z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+              <symbol id="i-home" viewBox="0 0 16 16"><path d="M2.5 8L8 3l5.5 5M4 7v6h8V7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+              <symbol id="i-folder" viewBox="0 0 16 16"><path d="M2 4.5A1.5 1.5 0 013.5 3h3l1.5 1.5h4.5A1.5 1.5 0 0114 6v5.5a1.5 1.5 0 01-1.5 1.5h-9A1.5 1.5 0 012 11.5z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+              <symbol id="i-trash" viewBox="0 0 16 16"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.6 8h5.8l.6-8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+              <symbol id="i-wifi" viewBox="0 0 16 16"><path d="M2 6.2a8.5 8.5 0 0112 0M4.2 8.6a5.4 5.4 0 017.6 0M6.4 11a2.3 2.3 0 013.2 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="13" r="1" fill="currentColor"/></symbol>
+              <symbol id="i-vol" viewBox="0 0 16 16"><path d="M2.5 6h2.2L8 3v10L4.7 10H2.5z" fill="currentColor"/><path d="M10.5 5.5a3.5 3.5 0 010 5M12.3 3.8a6 6 0 010 8.4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+              <symbol id="i-batt" viewBox="0 0 20 16"><rect x="1.5" y="4" width="15" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="3.3" y="5.8" width="10" height="4.4" rx="1" fill="currentColor"/><rect x="17.2" y="6.6" width="1.6" height="2.8" rx=".8" fill="currentColor"/></symbol>
+            </defs>
+          </svg>
           <div class="desktop">
             <div class="topbar">
-              <span class="tb-left"><img src="assets/icon-white.svg" alt="" width="14" height="14"></span>
-              <span class="tb-clock" id="clock">Thu 9:41 AM</span>
+              <span class="tb-logo"><img src="assets/icon-white.svg" alt=""></span>
+              <span class="tb-clock" id="clock">Thu Oct 29 9:41 PM</span>
               <span class="tb-right" aria-hidden="true">
-                <svg viewBox="0 0 16 16"><path d="M8 12.5l-6-6a8.5 8.5 0 0112 0z" fill="currentColor"/></svg>
-                <svg viewBox="0 0 16 16"><path d="M3 6h2l3-3v10l-3-3H3z" fill="currentColor"/><path d="M10.5 5.5a3.5 3.5 0 010 5" stroke="currentColor" fill="none" stroke-width="1.4" stroke-linecap="round"/></svg>
-                <svg viewBox="0 0 20 16"><rect x="1" y="4" width="15" height="8" rx="2" stroke="currentColor" fill="none" stroke-width="1.3"/><rect x="3" y="6" width="9" height="4" rx="1" fill="currentColor"/><rect x="17" y="6.5" width="1.6" height="3" rx=".8" fill="currentColor"/></svg>
+                <svg><use href="#i-wifi"/></svg>
+                <svg><use href="#i-vol"/></svg>
+                <svg class="batt"><use href="#i-batt"/></svg>
+                <em>100%</em>
               </span>
             </div>
 
-            <div class="window">
-              <div class="win-bar">
-                <span class="lights"><i></i><i></i><i></i></span>
+            <div class="win files">
+              <div class="hb">
+                <span class="hb-nav"><svg><use href="#i-back"/></svg><svg class="dim"><use href="#i-fwd"/></svg></span>
+                <span class="hb-path"><svg><use href="#i-home"/></svg>Home</span>
+                <span class="hb-tools"><svg><use href="#i-search"/></svg><svg><use href="#i-grid"/></svg><svg><use href="#i-menu"/></svg></span>
               </div>
-              <div class="win-body">
-                <img src="assets/app-icon.svg" width="56" height="56" alt="">
-                <h2>Welcome to Crooli OS</h2>
-                <p>Everything is set up. Here are a few places to start.</p>
-                <div class="tiles">
-                  <div class="tile"><b>Get apps</b><span>Free apps in one click</span></div>
-                  <div class="tile"><b>Light or dark</b><span>Change the whole look</span></div>
-                  <div class="tile"><b>Wi-Fi &amp; settings</b><span>Printers, wallpaper</span></div>
+              <div class="fbody">
+                <ul class="side">
+                  <li><svg><use href="#i-clock"/></svg>Recent</li>
+                  <li><svg><use href="#i-star"/></svg>Starred</li>
+                  <li class="sel"><svg><use href="#i-home"/></svg>Home</li>
+                  <li class="gap"><svg><use href="#i-folder"/></svg>Documents</li>
+                  <li><svg><use href="#i-folder"/></svg>Downloads</li>
+                  <li><svg><use href="#i-folder"/></svg>Music</li>
+                  <li><svg><use href="#i-folder"/></svg>Pictures</li>
+                  <li><svg><use href="#i-folder"/></svg>Videos</li>
+                  <li class="gap"><svg><use href="#i-trash"/></svg>Trash</li>
+                </ul>
+                <div class="items">
+                  <figure><img src="assets/os/folder.svg" alt=""><figcaption>Desktop</figcaption></figure>
+                  <figure><img src="assets/os/folder-documents.svg" alt=""><figcaption>Documents</figcaption></figure>
+                  <figure><img src="assets/os/folder-download.svg" alt=""><figcaption>Downloads</figcaption></figure>
+                  <figure><img src="assets/os/folder-music.svg" alt=""><figcaption>Music</figcaption></figure>
+                  <figure><img src="assets/os/folder-pictures.svg" alt=""><figcaption>Pictures</figcaption></figure>
+                  <figure><img src="assets/os/folder.svg" alt=""><figcaption>Public</figcaption></figure>
+                  <figure><img src="assets/os/folder.svg" alt=""><figcaption>Templates</figcaption></figure>
+                  <figure><img src="assets/os/folder-videos.svg" alt=""><figcaption>Videos</figcaption></figure>
                 </div>
               </div>
             </div>
 
+            <div class="win term">
+              <div class="hb">
+                <span class="hb-tab"><svg><use href="#i-plus"/></svg></span>
+                <span class="hb-title">Terminal</span>
+                <span class="hb-tools"><svg><use href="#i-menu"/></svg></span>
+              </div>
+              <pre class="tty"><span class="g">crooli@crooli</span>:<span class="b">~</span>$ head -3 /etc/os-release
+PRETTY_NAME="Crooli OS 1.0"
+NAME="Crooli OS"
+VERSION_ID="1.0"
+<span class="g">crooli@crooli</span>:<span class="b">~</span>$ <span class="cur"></span></pre>
+            </div>
+
             <div class="dock" aria-hidden="true">
-              <span class="app a-web"></span>
-              <span class="app a-files"></span>
-              <span class="app a-store"></span>
-              <span class="app a-cal"><b>29</b></span>
-              <span class="app a-text"></span>
-              <span class="app a-settings"></span>
+              <img src="assets/os/crooli-install.svg" alt="">
+              <img src="assets/os/firefox.svg" alt="">
+              <img src="assets/os/files.svg" alt="">
+              <img src="assets/os/org.gnome.Software.svg" alt="">
+              <img src="assets/os/calendar.svg" alt="">
+              <img src="assets/os/org.gnome.TextEditor.svg" alt="">
+              <img src="assets/os/org.gnome.Settings.svg" alt="">
               <span class="sep"></span>
-              <span class="app a-grid"></span>
+              <img src="assets/os/user-trash.svg" alt="">
+              <span class="apps"><svg><use href="#i-grid"/></svg></span>
             </div>
           </div>
         </figure>
