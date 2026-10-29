@@ -4,7 +4,10 @@ Name=Crooli
 [Dark]
 Foreground=#ededed
 Background=#0a0a0a
-Cursor=#3291ff
+CursorBackground=#3291ff
+CursorForeround=#0a0a0a
+TitlebarForeground=#ededed
+TitlebarBackground=#0a0a0a
 Color0=#171717
 Color1=#ff5f57
 Color2=#3ddc97
@@ -25,7 +28,10 @@ Color15=#ffffff
 [Light]
 Foreground=#171717
 Background=#ffffff
-Cursor=#0a6cf0
+CursorBackground=#0a6cf0
+CursorForeround=#ffffff
+TitlebarForeground=#171717
+TitlebarBackground=#fafafa
 Color0=#171717
 Color1=#c4281c
 Color2=#1f7a3d

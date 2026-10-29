@@ -9,3 +9,4 @@ Terminal=false
 Categories=System;
 Keywords=install;installer;setup;
 StartupNotify=true
+StartupWMClass=calamares

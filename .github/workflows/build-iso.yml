@@ -58,7 +58,9 @@ jobs:
             usr/share/icons/hicolor/256x256/apps/crooli-os.png \
             usr/share/icons/Papirus-Dark/index.theme \
             usr/share/fonts/truetype/crooli-sans/CrooliSans-Variable.ttf \
-            usr/share/org.gnome.Ptyxis/palettes/crooli.palette \
+            etc/skel/.local/share/org.gnome.Ptyxis/palettes/crooli.palette \
+            usr/share/applications/com.crooli.Welcome.desktop \
+            usr/share/glib-2.0/schemas/90_crooli.gschema.override \
             usr/bin/crooli-welcome usr/bin/crooli-install \
             usr/sbin/crooli-bootloader-config usr/share/crooli/bootloader/bios usr/share/crooli/bootloader/efi \
             etc/calamares/settings.conf etc/calamares/modules/users.conf; do
@@ -70,6 +72,7 @@ jobs:
           done
           unsquashfs -cat "$SQ" usr/lib/os-release | grep -q 'NAME="Crooli OS"' || { echo "os-release not Crooli"; fail=1; }
           unsquashfs -cat "$SQ" etc/dconf/db/crooli | grep -aq 'Papirus-Dark' || { echo "dconf db missing Crooli settings"; fail=1; }
+          unsquashfs -cat "$SQ" usr/share/glib-2.0/schemas/gschemas.compiled | grep -aq 'crooli' || { echo "schema override not compiled"; fail=1; }
           [ "$fail" = 0 ] && echo "Image contents verified."
           exit $fail
 
@@ -101,13 +104,15 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          name: Crooli OS 1.0
+          name: Crooli OS 1.0.1
           body: |
-            **Crooli OS 1.0**, the first release. A calm, fast desktop for people who have never used Linux.
+            **Crooli OS 1.0.1.** A calm, fast desktop for people who have never used Linux.
 
             1. Download the `.iso` file below.
             2. Write it to a USB stick with [balenaEtcher](https://etcher.balena.io).
             3. Start your computer from the USB stick, try it, then click **Install Crooli OS** in the dock.
+
+            What's new since 1.0: a Crooli boot menu instead of the Debian one, the Crooli colours in the terminal, and the right Crooli icon for the Welcome app in the dock.
 
             Checksum: see the `.sha256` file. Needs a 64-bit PC with 2 GB of memory and 16 GB of storage.
             More at https://os.crooli.com

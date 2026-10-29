@@ -9,3 +9,4 @@ Terminal=false
 Categories=System;
 Keywords=welcome;start;tour;help;
 StartupNotify=true
+StartupWMClass=com.crooli.Welcome

@@ -6,10 +6,10 @@ set -e
 # Divert Debian's os-release so base-files upgrades don't undo it.
 dpkg-divert --quiet --local --no-rename --add /usr/lib/os-release
 cat > /usr/lib/os-release <<'EOF'
-PRETTY_NAME="Crooli OS 1.0"
+PRETTY_NAME="Crooli OS 1.0.1"
 NAME="Crooli OS"
-VERSION_ID="1.0"
-VERSION="1.0"
+VERSION_ID="1.0.1"
+VERSION="1.0.1"
 VERSION_CODENAME=trixie
 ID=crooli
 ID_LIKE=debian
@@ -19,8 +19,8 @@ SUPPORT_URL="https://github.com/xandertaylorx/crooli-os/discussions"
 BUG_REPORT_URL="https://github.com/xandertaylorx/crooli-os/issues"
 EOF
 ln -sf ../usr/lib/os-release /etc/os-release
-printf '%s\n\n' 'Crooli OS 1.0 \n \l' > /etc/issue
-echo "Crooli OS 1.0" > /etc/issue.net
+printf '%s\n\n' 'Crooli OS 1.0.1 \n \l' > /etc/issue
+echo "Crooli OS 1.0.1" > /etc/issue.net
 
 # --- Bitmaps --------------------------------------------------------------
 B=/usr/share/crooli
@@ -48,6 +48,9 @@ if [ -d /usr/share/gdm/dconf ]; then
 	cp /etc/dconf/db/gdm.d/00-crooli /usr/share/gdm/dconf/99-crooli-settings
 	dconf compile /usr/share/gdm/greeter-dconf-defaults /usr/share/gdm/dconf
 fi
+
+# --- Defaults that live in GSettings schemas (terminal palette)
+glib-compile-schemas /usr/share/glib-2.0/schemas
 
 # --- Fonts and desktop defaults ------------------------------------------
 fc-cache -f >/dev/null

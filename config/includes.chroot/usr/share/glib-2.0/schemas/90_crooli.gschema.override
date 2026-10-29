@@ -1,0 +1,10 @@
+[org.gnome.Ptyxis.Profile]
+palette='crooli'
+
+[org.gnome.Ptyxis]
+interface-style='dark'
+use-system-font=false
+font-name='JetBrains Mono 12'
+default-columns=100
+default-rows=28
+restore-session=false

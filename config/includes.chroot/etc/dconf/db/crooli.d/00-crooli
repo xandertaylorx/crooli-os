@@ -96,11 +96,3 @@ remove-old-trash-files=true
 remove-old-temp-files=true
 old-files-age=uint32 30
 
-[org/gnome/Ptyxis]
-palette='crooli'
-interface-style='dark'
-use-system-font=false
-font-name='JetBrains Mono 12'
-default-columns=100
-default-rows=28
-restore-session=false
