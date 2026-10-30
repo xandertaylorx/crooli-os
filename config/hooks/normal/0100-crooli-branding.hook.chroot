@@ -6,10 +6,10 @@ set -e
 # Divert Debian's os-release so base-files upgrades don't undo it.
 dpkg-divert --quiet --local --no-rename --add /usr/lib/os-release
 cat > /usr/lib/os-release <<'EOF'
-PRETTY_NAME="Crooli OS 1.1.1"
+PRETTY_NAME="Crooli OS 1.1.2"
 NAME="Crooli OS"
-VERSION_ID="1.1.1"
-VERSION="1.1.1"
+VERSION_ID="1.1.2"
+VERSION="1.1.2"
 VERSION_CODENAME=trixie
 ID=crooli
 ID_LIKE=debian
@@ -19,8 +19,8 @@ SUPPORT_URL="https://github.com/xandertaylorx/crooli-os/discussions"
 BUG_REPORT_URL="https://github.com/xandertaylorx/crooli-os/issues"
 EOF
 ln -sf ../usr/lib/os-release /etc/os-release
-printf '%s\n\n' 'Crooli OS 1.1.1 \n \l' > /etc/issue
-echo "Crooli OS 1.1.1" > /etc/issue.net
+printf '%s\n\n' 'Crooli OS 1.1.2 \n \l' > /etc/issue
+echo "Crooli OS 1.1.2" > /etc/issue.net
 
 # --- Bitmaps --------------------------------------------------------------
 B=/usr/share/crooli

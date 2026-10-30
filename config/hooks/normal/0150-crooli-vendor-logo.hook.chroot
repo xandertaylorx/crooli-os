@@ -1,0 +1,41 @@
+#!/bin/sh
+# Settings > About (and other places) show the "vendor logo" from
+# /usr/share/icons/vendor. Debian's desktop-base points those files at the
+# Debian swirl through a priority-50 alternative called vendor-logos. Register
+# Crooli's at a higher priority so ours wins, and keeps winning when
+# desktop-base is upgraded.
+set -e
+
+SRC=/usr/share/crooli
+E=/usr/share/icons/crooli
+
+for dir in scalable 64x64 128x128 256x256; do
+	mkdir -p "$E/$dir/emblems"
+done
+
+# Normal: the Crooli app icon (white mark on an Ink tile) reads on light and
+# dark. White: the bare white mark. Symbolic: the mark in neutral grey.
+cp /usr/share/icons/hicolor/scalable/apps/crooli-os.svg "$E/scalable/emblems/emblem-crooli.svg"
+cp "$SRC/icon-white.svg" "$E/scalable/emblems/emblem-crooli-white.svg"
+sed 's/#FFFFFF/#bebebe/g' "$SRC/icon-white.svg" > "$E/scalable/emblems/emblem-crooli-symbolic.svg"
+
+for px in 64 128 256; do
+	for v in "" -white -symbolic; do
+		rsvg-convert -w "$px" -h "$px" "$E/scalable/emblems/emblem-crooli$v.svg" \
+			-o "$E/${px}x${px}/emblems/emblem-crooli$v.png"
+	done
+done
+
+mkdir -p "$SRC/vendor-logos"
+
+# Same links and slave names as desktop-base uses, pointing at our files.
+set -- --install /usr/share/images/vendor-logos vendor-logos "$SRC/vendor-logos" 100
+for size in 64 128 256 scalable; do
+	if [ "$size" = scalable ]; then dir=scalable; ext=svg; else dir="${size}x${size}"; ext=png; fi
+	for v in "" -symbolic -white; do
+		set -- "$@" --slave "/usr/share/icons/vendor/$dir/emblems/emblem-vendor$v.$ext" \
+			"emblem-vendor$v-$size" "$E/$dir/emblems/emblem-crooli$v.$ext"
+	done
+done
+update-alternatives "$@"
+update-alternatives --set vendor-logos "$SRC/vendor-logos"
