@@ -89,10 +89,11 @@ jobs:
           unsquashfs -cat "$SQ" usr/lib/os-release | grep -q 'NAME="Crooli OS"' || { echo "os-release not Crooli"; fail=1; }
           unsquashfs -cat "$SQ" etc/dconf/db/crooli | grep -aq 'Papirus-Dark' || { echo "dconf db missing Crooli settings"; fail=1; }
           unsquashfs -cat "$SQ" usr/share/glib-2.0/schemas/gschemas.compiled | grep -aq 'crooli' || { echo "schema override not compiled"; fail=1; }
-          # The boot menu must be ours, not Debian's.
-          for f in binary/boot/grub/splash.svg; do
-            grep -q 'os.crooli.com' "$f" || { echo "Boot menu image is not Crooli's: $f"; fail=1; }
-          done
+          # The boot menu must be ours, not Debian's. live-build turns the SVG
+          # into splash.png and then deletes the SVG, so check the source we
+          # ship and that the picture was generated.
+          grep -q 'os.crooli.com' config/bootloaders/splash.svg || { echo "config/bootloaders/splash.svg is not Crooli's"; fail=1; }
+          test -s binary/boot/grub/splash.png || { echo "no boot menu image was generated"; fail=1; }
           [ "$fail" = 0 ] && echo "Image contents verified for ${{ matrix.arch }}."
           exit $fail
 
