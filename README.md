@@ -78,9 +78,8 @@ the run's artifacts. Tagging a commit `v*` publishes a release.
 
 ## Try it
 
-Write the ISO to a USB stick with [balenaEtcher](https://etcher.balena.io) or
-[Fedora Media Writer](https://github.com/FedoraQt/MediaWriter), boot from it,
-and click **Install Crooli OS** in the dock. Or open it in a virtual machine
+Write the ISO to a USB stick with [Flash by Crooli](https://crooli.com/flash),
+boot from it, and click **Install Crooli OS** in the dock. Or open it in a virtual machine
 (GNOME Boxes, UTM, VirtualBox) with UEFI enabled.
 
 ## Contributing
