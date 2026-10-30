@@ -93,6 +93,7 @@ jobs:
           # into splash.png and then deletes the SVG, so check the source we
           # ship and that the picture was generated.
           grep -q 'os.crooli.com' config/bootloaders/splash.svg || { echo "config/bootloaders/splash.svg is not Crooli's"; fail=1; }
+          grep -q '^title-text: ""' binary/boot/grub/live-theme/theme.txt || { echo "boot menu still has the Live Boot Menu title"; fail=1; }
           test -s binary/boot/grub/splash.png || { echo "no boot menu image was generated"; fail=1; }
           [ "$fail" = 0 ] && echo "Image contents verified for ${{ matrix.arch }}."
           exit $fail

@@ -70,7 +70,7 @@ On any machine with Docker or Podman (macOS included):
 ```
 
 On Debian with `live-build` installed, the same script runs it natively.
-The ISO appears in the repository root, for example `crooli-os-1.1-arm64.hybrid.iso`.
+The ISO appears in the repository root, for example `crooli-os-1.1.1-arm64.hybrid.iso`.
 A full build takes 20–60 minutes and needs about 15 GB of free space.
 
 Every push to `main` also builds the ISO on GitHub Actions; download it from

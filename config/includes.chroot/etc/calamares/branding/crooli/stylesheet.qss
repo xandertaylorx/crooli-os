@@ -25,6 +25,28 @@ QScrollArea > QWidget > QWidget { background-color: transparent; }
 
 QDialog, QMessageBox { background-color: #141414; }
 
+/* Checkboxes and radio buttons: a visible square or circle, filled blue when on. */
+QCheckBox::indicator, QRadioButton::indicator {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #6F6F6F;
+    background-color: #171717;
+}
+QCheckBox::indicator { border-radius: 4px; }
+QRadioButton::indicator { border-radius: 9px; }
+QCheckBox::indicator:checked, QRadioButton::indicator:checked {
+    background-color: #3291FF;
+    border-color: #3291FF;
+}
+
+/* The partition legend draws its names in black, so give it a light card. */
+PartitionLabelsView {
+    background-color: #EDEDED;
+    color: #0A0A0A;
+    border: none;
+    border-radius: 8px;
+}
+
 QPushButton, QToolButton {
     background-color: #171717;
     color: #EDEDED;
