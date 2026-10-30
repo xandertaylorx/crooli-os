@@ -8,6 +8,8 @@
   "trailingSlash": false,
   "redirects": [
     { "source": "/download", "destination": "https://github.com/xandertaylorx/crooli-os/releases/latest", "permanent": false },
+    { "source": "/download/intel", "destination": "https://github.com/xandertaylorx/crooli-os/releases/latest/download/crooli-os-amd64.iso", "permanent": false },
+    { "source": "/download/arm", "destination": "https://github.com/xandertaylorx/crooli-os/releases/latest/download/crooli-os-arm64.iso", "permanent": false },
     { "source": "/github", "destination": "https://github.com/xandertaylorx/crooli-os", "permanent": false }
   ],
   "headers": [

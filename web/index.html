@@ -52,62 +52,26 @@
           <a class="btn btn-paper" href="#download">Download Crooli OS</a>
           <a class="btn btn-ghost" href="https://github.com/xandertaylorx/crooli-os">View on GitHub</a>
         </div>
-        <p class="hero-meta">Version 1.0.1 <span aria-hidden="true">·</span> Free <span aria-hidden="true">·</span> For 64-bit PCs</p>
+        <p class="hero-meta">Version 1.1 <span aria-hidden="true">·</span> Free <span aria-hidden="true">·</span> For Intel, AMD and Apple silicon</p>
       </div>
 
       <div class="wrap">
         <figure class="screen reveal" aria-label="Screenshots of Crooli OS">
           <div class="shots">
-            <img class="shot on" id="shot-desktop" src="assets/shots/desktop.webp" width="1440" height="900" alt="The Crooli OS desktop: a dark top bar with the Crooli menu, a floating dock and the blue Crooli wallpaper.">
+            <img class="shot on" id="shot-welcome" src="assets/shots/welcome.webp" width="1440" height="900" alt="The Crooli OS Welcome screen on the desktop: a dark top bar with the Crooli menu, six shortcut tiles and a floating dock.">
             <img class="shot" id="shot-files" src="assets/shots/files.webp" width="1440" height="900" loading="lazy" alt="Files, the file manager, in Crooli's dark colours with a sidebar and blue folders.">
             <img class="shot" id="shot-settings" src="assets/shots/settings.webp" width="1440" height="900" loading="lazy" alt="Settings in Crooli OS, with a dark sidebar and blue toggles.">
-            <img class="shot" id="shot-installer" src="assets/shots/installer.webp" width="1440" height="900" loading="lazy" alt="The Crooli OS installer with its steps down the left side.">
+            <img class="shot" id="shot-terminal" src="assets/shots/terminal.webp" width="1440" height="900" loading="lazy" alt="The terminal in Crooli's colours, showing the Crooli OS version.">
+            <img class="shot" id="shot-installer" src="assets/shots/installer.webp" width="1440" height="900" loading="lazy" alt="The Crooli OS installer, with its steps down the left side and a blue progress bar.">
           </div>
         </figure>
         <div class="shot-tabs" role="tablist" aria-label="Crooli OS screenshots">
-          <button role="tab" aria-selected="true" aria-controls="shot-desktop" data-shot="shot-desktop">Desktop</button>
+          <button role="tab" aria-selected="true" aria-controls="shot-welcome" data-shot="shot-welcome">Welcome</button>
           <button role="tab" aria-selected="false" aria-controls="shot-files" data-shot="shot-files">Files</button>
           <button role="tab" aria-selected="false" aria-controls="shot-settings" data-shot="shot-settings">Settings</button>
+          <button role="tab" aria-selected="false" aria-controls="shot-terminal" data-shot="shot-terminal">Terminal</button>
           <button role="tab" aria-selected="false" aria-controls="shot-installer" data-shot="shot-installer">Installer</button>
         </div>
-                  <figure><img src="assets/os/folder-documents.svg" alt=""><figcaption>Documents</figcaption></figure>
-                  <figure><img src="assets/os/folder-download.svg" alt=""><figcaption>Downloads</figcaption></figure>
-                  <figure><img src="assets/os/folder-music.svg" alt=""><figcaption>Music</figcaption></figure>
-                  <figure><img src="assets/os/folder-pictures.svg" alt=""><figcaption>Pictures</figcaption></figure>
-                  <figure><img src="assets/os/folder.svg" alt=""><figcaption>Public</figcaption></figure>
-                  <figure><img src="assets/os/folder.svg" alt=""><figcaption>Templates</figcaption></figure>
-                  <figure><img src="assets/os/folder-videos.svg" alt=""><figcaption>Videos</figcaption></figure>
-                </div>
-              </div>
-            </div>
-
-            <div class="win term">
-              <div class="hb">
-                <span class="hb-tab"><svg><use href="#i-plus"/></svg></span>
-                <span class="hb-title">Terminal</span>
-                <span class="hb-tools"><svg><use href="#i-menu"/></svg></span>
-              </div>
-              <pre class="tty"><span class="g">crooli@crooli</span>:<span class="b">~</span>$ head -3 /etc/os-release
-PRETTY_NAME="Crooli OS 1.0.1"
-NAME="Crooli OS"
-VERSION_ID="1.0.1"
-<span class="g">crooli@crooli</span>:<span class="b">~</span>$ <span class="cur"></span></pre>
-            </div>
-
-            <div class="dock" aria-hidden="true">
-              <img src="assets/os/crooli-install.svg" alt="">
-              <img src="assets/os/firefox.svg" alt="">
-              <img src="assets/os/files.svg" alt="">
-              <img src="assets/os/org.gnome.Software.svg" alt="">
-              <img src="assets/os/calendar.svg" alt="">
-              <img src="assets/os/org.gnome.TextEditor.svg" alt="">
-              <img src="assets/os/org.gnome.Settings.svg" alt="">
-              <span class="sep"></span>
-              <img src="assets/os/user-trash.svg" alt="">
-              <span class="apps"><svg><use href="#i-grid"/></svg></span>
-            </div>
-          </div>
-        </figure>
       </div>
     </section>
 
@@ -197,7 +161,7 @@ VERSION_ID="1.0.1"
         <li class="reveal">
           <span class="n">02</span>
           <h3>Make a USB stick</h3>
-          <p>Open <a href="https://etcher.balena.io">balenaEtcher</a>, pick the file, pick your USB stick, click Flash.</p>
+          <p>Open <a href="https://etcher.balena.io">balenaEtcher</a>, pick the file, pick your USB stick, click Flash. On a Mac, open it in UTM instead.</p>
         </li>
         <li class="reveal">
           <span class="n">03</span>
@@ -220,8 +184,8 @@ VERSION_ID="1.0.1"
 <pre><code><span class="p">$</span> git clone https://github.com/xandertaylorx/crooli-os
 <span class="p">$</span> cd crooli-os
 <span class="p">$</span> ./build.sh
-<span class="m">Building Crooli OS 1.0.1 on Debian 13…</span>
-<span class="ok">✓</span> crooli-os-1.0.1-amd64.hybrid.iso</code></pre>
+<span class="m">Building Crooli OS 1.1 on Debian 13…</span>
+<span class="ok">✓</span> crooli-os-1.1-amd64.hybrid.iso</code></pre>
       </div>
     </section>
 
@@ -231,13 +195,14 @@ VERSION_ID="1.0.1"
       <div class="wrap download-inner reveal">
         <img src="assets/app-icon.svg" width="72" height="72" alt="">
         <h2 class="h2">Get Crooli OS</h2>
-        <p class="lede">Version 1.0.1 for 64-bit PCs. Free, with no account needed.</p>
+        <p class="lede">Version 1.1. Free, with no account needed.</p>
         <div class="cta">
-          <a class="btn btn-paper" href="/download">Download for PC</a>
-          <a class="btn btn-ghost" href="https://github.com/xandertaylorx/crooli-os/actions/workflows/build-iso.yml">Latest test build</a>
+          <a class="btn btn-paper" href="/download/intel">Intel or AMD PC</a>
+          <a class="btn btn-paper" href="/download/arm">Apple silicon or ARM</a>
         </div>
+        <p class="dl-note">On a Mac with an M-series chip? Download the Apple silicon version and open it in <a href="https://mac.getutm.app">UTM</a>, choosing <b>Virtualize</b>.</p>
         <dl class="reqs">
-          <div><dt>Processor</dt><dd>64-bit Intel or AMD</dd></div>
+          <div><dt>Processor</dt><dd>64-bit Intel, AMD or ARM</dd></div>
           <div><dt>Memory</dt><dd>2 GB (4 GB recommended)</dd></div>
           <div><dt>Storage</dt><dd>16 GB</dd></div>
           <div><dt>USB stick</dt><dd>4 GB or larger</dd></div>
