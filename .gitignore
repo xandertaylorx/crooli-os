@@ -23,7 +23,6 @@ config/common
 config/source
 config/apt/
 config/archives/
-config/bootloaders/
 config/debian-installer/
 config/includes/
 config/includes.binary/

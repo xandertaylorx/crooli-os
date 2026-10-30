@@ -89,6 +89,10 @@ jobs:
           unsquashfs -cat "$SQ" usr/lib/os-release | grep -q 'NAME="Crooli OS"' || { echo "os-release not Crooli"; fail=1; }
           unsquashfs -cat "$SQ" etc/dconf/db/crooli | grep -aq 'Papirus-Dark' || { echo "dconf db missing Crooli settings"; fail=1; }
           unsquashfs -cat "$SQ" usr/share/glib-2.0/schemas/gschemas.compiled | grep -aq 'crooli' || { echo "schema override not compiled"; fail=1; }
+          # The boot menu must be ours, not Debian's.
+          for f in binary/boot/grub/splash.svg; do
+            grep -q 'os.crooli.com' "$f" || { echo "Boot menu image is not Crooli's: $f"; fail=1; }
+          done
           [ "$fail" = 0 ] && echo "Image contents verified for ${{ matrix.arch }}."
           exit $fail
 

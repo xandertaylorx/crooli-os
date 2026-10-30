@@ -2,7 +2,7 @@
 componentName: crooli
 
 welcomeStyleCalamares: false
-welcomeExpandingLogo: true
+welcomeExpandingLogo: false
 windowExpanding: normal
 windowSize: 960px,640px
 windowPlacement: center
@@ -12,10 +12,10 @@ navigation: widget
 strings:
     productName:         "Crooli OS"
     shortProductName:    "Crooli OS"
-    version:             "1.0.1"
-    shortVersion:        "1.0.1"
-    versionedName:       "Crooli OS 1.0.1"
-    shortVersionedName:  "Crooli OS 1.0.1"
+    version:             "1.1"
+    shortVersion:        "1.1"
+    versionedName:       "Crooli OS 1.1"
+    shortVersionedName:  "Crooli OS 1.1"
     bootloaderEntryName: "Crooli OS"
     productUrl:          "https://os.crooli.com"
     supportUrl:          "https://github.com/xandertaylorx/crooli-os/discussions"
